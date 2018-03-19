@@ -1,0 +1,743 @@
+[colors]
+background = ${xrdb:color0}
+;background = #073642
+background-alt = ${xrdb:color2}
+foreground = ${xrdb:color7}
+;foreground = #bbb
+foreground-alt = ${xrdb:color4}
+primary = ${xrdb:color6}
+secondary =${xrdb:color8}
+alert = ${xrdb:color10}
+
+
+[bar/test]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 30
+offset-x = 0%
+offset-y = 0%
+radius = 0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+dim-value = 0.9
+
+line-size = 2
+line-color = ${colors.background-alt}
+
+border-size = 0
+border-bottom-size = 0
+border-color =${colors.background}
+
+padding-left = 3
+padding-right = 3
+
+module-margin-left = 2
+module-margin-right = 2
+
+font-0 = Hack-Regular:pixelsize=10;1
+font-1 = FontAwesome:style=Regular:pixelsize=12;-2
+font-2 = Weather Icons:size=12;1
+;font-3 = fontawesome:pixelsize=9
+;font-4 = "Symbola:pixelsize=12;1"
+
+modules-left =  mpd  volume 
+modules-center = i3 
+modules-right = temperature  wlan xkeyboard date powermenu  
+
+
+tray-position = right
+;tray-padding = 2
+;tray-transparent = true
+;tray-background = #0063ff
+
+;wm-restack = i3
+
+;override-redirect = true
+
+;scroll-up = i3wm-wsnext
+;scroll-down = i3wm-wsprev
+[bar/top]
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 30
+offset-x = 0%
+offset-y = 0%
+radius = 0
+fixed-center = false
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+dim-value = 0.9
+
+line-size = 0
+line-color = ${colors.background-alt}
+
+border-size = 0
+border-bottom-size = 0
+border-color =${colors.background}
+
+padding-left = 1
+padding-right = 1
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = Hack-Regular:pixelsize=10;1
+font-1 = FontAwesome:style=Regular:pixelsize=12;-2
+;font-1 = Weather Icons:size=12;1
+;font-3 = fontawesome:pixelsize=9
+;font-4 = "Symbola:pixelsize=12;1"
+
+modules-left = pulseaudio-tail  prev spotifys next 
+modules-center = i3 mpd
+modules-right = temperature  wlan xkeyboard date powermenu  
+
+
+tray-position = right
+;tray-padding = 2
+;tray-transparent = true
+;tray-background = #0063ff
+
+wm-restack = i3
+
+;override-redirect = true
+
+
+[bar/bottom]
+;monitor = eDP-1
+bottom = true
+width = 100%
+height = 27
+
+font-0 = Hack-Regular:pixelsize=9;1
+font-2 = FontAwesome:style=Regular:pixelsize=10;-2
+font-1 = Weather Icons:size=12;1
+
+background = ${bar/top.background}
+foreground = ${bar/top.foreground}
+
+line-color = ${bar/top.background}
+line-size = 2
+
+spacing = 3
+padding-right = 4
+module-margin-left = 0
+module-margin-right = 6
+
+
+modules-left = i3bottom 
+modules-center = openweathermap-fullfeatured 
+modules-right = cpu memory
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-underline = ${colors.secondary}
+
+label-layout =
+label-layout-underline = ${colors.background}
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-background = ${colors.secondary}
+label-indicator-underline = ${colors.background}
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+
+label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/bspwm]
+type = internal/bspwm
+
+label-focused = %index%
+label-focused-background = #002b36
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+label-occupied = %index%
+label-occupied-padding = 1
+
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 1
+
+label-empty = %index%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 1
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false 
+strip-wsnumbers = true
+reverse-scroll = false
+
+; Only show workspaces on the same output as the bar
+pin-workspaces = true
+
+label-mode-padding = 2
+label-mode-foreground = ${colors.foreground}
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = %icon%
+label-focused-background = ${xrdb:color4}
+label-focused-underline =${xrdb:color2}
+label-focused-padding = ${module/bspwm.label-focused-padding}
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused =  %icon%
+label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+
+; visible = Active workspace on unfocused monitor
+label-visible = %icon%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent =  %icon%
+label-urgent-background = ${module/bspwm.label-urgent-background}
+label-urgent-padding = ${module/bspwm.label-urgent-padding}
+
+ws-icon-defaut = 
+ws-icon-0 = 1;
+ws-icon-1 = 2; 
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+ws-icon-9 = 10;
+
+
+
+[module/mpd]
+type = internal/mpd
+
+host = 127.0.0.1
+port = 6600
+
+; Seconds to sleep between progressbar/song timer sync
+; Default: 1
+interval = 2
+; Available tags:
+;   <label-song> (default)
+;   <label-time>
+;   <bar-progress>
+;   <toggle> - gets replaced with <icon-(pause|play)>
+;   <toggle-stop> - gets replaced with <icon-(stop|play)>
+;   <icon-random>
+;   <icon-repeat>
+;   <icon-repeatone>
+;   <icon-consume>
+;   <icon-prev>
+;   <icon-stop>
+;   <icon-play>
+;   <icon-pause>
+;   <icon-next>
+;   <icon-seekb>
+;   <icon-seekf>
+format-online = <icon-prev> <icon-seekb> <icon-stop> <toggle> <icon-seekf> <icon-next>  <icon-repeat> <icon-random>  <bar-progress> <label-time>  <label-song>
+;format-playing = ${self.format-online}
+;format-paused = ${self.format-online}
+;format-stopped = ${self.format-online}
+
+; Available tags:
+;   <label-offline>
+;format-offline = <label-offline>
+
+; Available tokens:
+;   %artist%
+;   %album%
+;   %date%
+;   %title%
+; Default: %artist% - %title%
+label-song = 𝄞 %artist% - %title%
+
+; Available tokens:
+;   %elapsed%
+;   %total%
+; Default: %elapsed% / %total%
+;label-time = %elapsed% / %total%
+
+; Available tokens:
+;   None
+label-offline = 🎜 mpd is offline
+
+; Only applies if <icon-X> is used
+icon-play = ⏵
+icon-pause = ⏸
+icon-stop = ⏹
+icon-prev = ⏮
+icon-next = ⏭
+icon-seekb = ⏪
+icon-seekf = ⏩
+icon-random = 🔀
+icon-repeat = 🔁
+icon-repeatone = 🔂
+icon-consume = ✀
+
+; Used to display the state of random/repeat/repeatone
+; Only applies if <icon-[random|repeat|repeatone]> is used
+toggle-on-foreground = #ff
+toggle-off-foreground = #55
+
+; Only applies if <bar-progress> is used
+bar-progress-width = 45
+bar-progress-indicator = |
+bar-progress-fill = ─
+bar-progress-empty = ─
+[module/xbacklight]
+type = internal/xbacklight
+
+format = <label> <bar>
+label = %percentage%%
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = #ff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.foreground-alt}
+
+[module/backlight-acpi]
+inherit = module/xbacklight
+;type = internal/backlight
+card = intel_backlight
+;enable-scroll = true
+label =  %percentage%%
+
+ramp-0 = 🌕
+ramp-1 = 🌔
+ramp-2 = 🌓
+ramp-3 = 🌒
+ramp-4 = 🌑
+
+
+[module/cpu]
+type = internal/cpu
+interval = 0.5
+format = <label> <ramp-coreload>
+label = CPU
+
+ramp-coreload-0 = ▁
+ramp-coreload-0-font = 2
+ramp-coreload-0-foreground = #aaff77
+ramp-coreload-1 = ▂
+ramp-coreload-1-font = 2
+ramp-coreload-1-foreground = #aaff77
+ramp-coreload-2 = ▃
+ramp-coreload-2-font = 2
+ramp-coreload-2-foreground = #aaff77
+ramp-coreload-3 = ▄
+ramp-coreload-3-font = 2
+ramp-coreload-3-foreground = #aaff77
+ramp-coreload-4 = ▅
+ramp-coreload-4-font = 2
+ramp-coreload-4-foreground = #fba922
+ramp-coreload-5 = ▆
+ramp-coreload-5-font = 2
+ramp-coreload-5-foreground = #fba922
+ramp-coreload-6 = ▇
+ramp-coreload-6-font = 2
+ramp-coreload-6-foreground = #ff5555
+ramp-coreload-7 = █
+ramp-coreload-7-font = 2
+ramp-coreload-7-foreground = #ff5555
+[module/memory]
+
+type = internal/memory
+format = <label> <bar-used>
+label = RAM
+
+bar-used-width = 20
+bar-used-foreground-0 = #aaff77
+bar-used-foreground-1 = #aaff77
+bar-used-foreground-2 = #fba922
+bar-used-foreground-3 = #ff5555
+bar-used-indicator = |
+bar-used-indicator-font = 6
+bar-used-indicator-foreground = #ff
+bar-used-fill = ─
+bar-used-fill-font = 6
+bar-used-empty = ─
+bar-used-empty-font = 6
+bar-used-empty-foreground = ${xrdb:color3}
+[module/wlan]
+type = internal/network
+interface = wlp0s18f2u1
+format-connected = <label-connected>
+
+; Available tags:
+;   <label-disconnected> (default)
+format-disconnected = <label-disconnected>
+
+; Available tags:
+;   <label-connected> (default)
+;   <label-packetloss>
+;   <animation-packetloss>
+format-packetloss = <animation-packetloss> <label-connected>
+
+; Available tokens:
+;   %ifname%    [wireless+wired]
+;   %local_ip%  [wireless+wired]
+;   %essid%     [wireless]
+;   %signal%    [wireless]
+;   %upspeed%   [wireless+wired]
+;   %downspeed% [wireless+wired]
+;   %linkspeed% [wired]
+; Default: %ifname% %local_ip%
+label-connected = %essid%
+label-connected-foreground = #eefafafa
+
+; Available tokens:
+;   %ifname%    [wireless+wired]
+; Default: (none)
+label-disconnected = not connected
+label-disconnected-foreground = #66ffffff
+
+; Available tokens:
+;   %ifname%    [wireless+wired]
+;   %local_ip%  [wireless+wired]
+;   %essid%     [wireless]
+;   %signal%    [wireless]
+;   %linkspeed% [wired]
+; Default: (none)
+;label-packetloss = %essid%
+;label-packetloss-foreground = #eefafafa
+
+; Only applies if <ramp-signal> is used
+;ramp-signal-0 = 😱
+;ramp-signal-1 = 😠
+;ramp-signal-2 = 😒
+;ramp-signal-3 = 😊
+;ramp-signal-4 = 😃
+;ramp-signal-5 = 😈
+
+; Only applies if <animation-packetloss> is used
+enable-click = true
+animation-packetloss-0 = ⚠
+animation-packetloss-0-foreground = #ffa64c
+animation-packetloss-1 = 📶
+animation-packetloss-1-foreground = #000000
+; Framerate in milliseconds
+animation-packetloss-framerate = 500
+[module/eth]
+type = internal/network
+interface = enx582c80139263
+interval = 3.0
+accumulate-stats = true
+
+format-connected-underline = #55aa55
+format-connected-prefix = " "
+format-connected-foreground-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected-underline = ${self.format-connected-underline}
+label-disconnected = %ifname% disconnected
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = " %A, %B %d"
+date-alt = " %Y-%m-%d"
+
+time = %I:%M
+time-alt = %I:%M:%S
+
+format-prefix = 
+format-prefix-foreground = ${xrdb:color8}
+format-background = ${xrdb:color12}
+format-padding = 3
+;format-underline = #0a6cf5
+
+label = %date% %time%
+
+[module/volume]
+type = internal/volume
+
+;master-soundcard = default
+master-soundcard= default
+speaker-soundcard = default
+;headphone-soundcard = default
+
+;headphone-mixer = Headphone
+;headphone-id = 16
+
+master-mixer = Master
+mapping = false 
+
+format-volume = <ramp-volume>
+format-muted = <label-muted>
+label-muted = 
+label-foreground = ${xrdb:color2}
+label-muted-foreground = ${xrdb:color9}
+format-volume-padding = 0
+format-muted-padding = 0
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-headphones-0 = 
+format-spacing = 0
+[module/battery]
+type = internal/battery
+
+; This is useful in case the battery never reports 100% charge
+full-at = 99
+
+; Use the following command to list batteries and adapters:
+; $ ls -1 /sys/class/power_supply/
+battery = BAT1
+adapter = ACAD
+
+; If an inotify event haven't been reported in this many
+; seconds, manually poll for new values.
+;
+; Needed as a fallback for systems that don't report events
+; on sysfs/procfs.
+;
+; Disable polling by setting the interval to 0.
+;
+; Default: 5
+poll-interval = 5
+
+; see "man date" for details on how to format the time string
+; NOTE: if you want to use syntax tags here you need to use %%{...}
+; Default: %H:%M:%S
+time-format = %H:%M
+
+; Available tags:
+;   <label-charging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;   <animation-charging>
+format-charging = <animation-charging> <label-charging>
+
+; Available tags:
+;   <label-discharging> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+format-discharging = <ramp-capacity> <label-discharging>
+
+; Available tags:
+;   <label-full> (default)
+;   <bar-capacity>
+;   <ramp-capacity>
+;format-full = <ramp-capacity> <label-full>
+
+; Available tokens:
+;   %percentage% (default)
+;   %time%
+;   %consumption% (shows current charge rate in watts)
+label-charging = Charging %percentage%%
+
+; Available tokens:
+;   %percentage% (default)
+;   %time%
+;   %consumption% (shows current discharge rate in watts)
+label-discharging = %percentage%%
+
+; Available tokens:
+;   %percentage% (default)
+label-full = Fully charged
+
+; Only applies if <ramp-capacity> is used
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+
+; Only applies if <bar-capacity> is used
+bar-capacity-width = 10
+
+; Only applies if <animation-charging> is used
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+; Framerate in milliseconds
+animation-charging-framerate = 750
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <ramp> <label>
+format-underline = #00000000
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature%
+label-warn = %temperature%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
+ramp-foreground = ${colors.foreground-alt}
+
+[module/powermenu]
+type = custom/menu
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = ${xrdb:color4}
+label-close =  cancel
+label-close-foreground = ${xrdb:color2}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = power off
+menu-2-0-exec = sudo poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+
+modules-left = cpu ram battery
+[module/spotifym]
+type = custom/menu
+
+format-spacing = 0
+
+label-open = 
+label-open-foreground = ${xrdb:color4}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = Next
+menu-0-0-exec = playerctl next
+
+menu-0-1 = sh spotify.sh
+menu-0-1-exec = playerctl play-pause
+
+menu-0-2 = prev
+menu-0-2-exec = playerctl previous
+
+[module/spotifys]
+type = custom/script
+exec = ~/.config/polybar/min-music.sh
+tail = true
+click-left = exec playerctl play-pause
+click-right = exec google-play-music-desktop-player &
+format-spacing = 0
+format-padding = 0
+[module/prev]
+type = custom/script
+exec = exec echo   
+click-left = exec playerctl previous
+tail = false
+format-spacing = 0
+format-padding = 0
+;icon-play = ⏵
+;icon-pause = ⏸
+;icon-stop = ⏹
+;icon-prev = ⏮
+;icon-next = ⏭
+;
+[module/next]
+type = custom/script
+;exec = exec echo   
+exec = exec echo 
+click-left = exec playerctl next
+tail = false
+
+format-spacing = 0
+format-padding = 0
+[module/i3bottom]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+enable-scroll = false
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+label-focused = %index%
+label-focused-background = ${xrdb:color4} 
+label-focused-underline = ${xrdb:color3}
+label-focused-padding = ${module/bspwm.label-focused-padding}
+
+label-unfocused = %index%
+label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-background}
+label-visible-padding = ${self.label-focused-padding}
+
+label-urgent = %index%!
+label-urgent-background = ${module/bspwm.label-urgent-background}
+label-urgent-padding = ${module/bspwm.label-urgent-padding}
+[module/title]
+type = internal/xwindow
+format-padding = 4
+[module/openweathermap-fullfeatured]
+type = custom/script
+exec = /home/gem/.config/polybar/polybar-scripts/polybar-scripts/openweathermap-fullfeatured/openweathermap-fullfeatured.sh
+interval = 600
+label-font = 1
+[module/pulseaudio-tail]
+type = custom/script
+exec = /home/gem/.config/polybar/polybar-scripts/polybar-scripts/pulseaudio-tail/pulseaudio-tail.sh
+tail = true
+click-right = exec pavucontrol &
+click-left = /home/gem/.config/polybar/polybar-scripts/polybar-scripts/pulseaudio-tail/pulseaudio-tail.sh --mute
+scroll-up = /home/gem/.config/polybar/polybar-scripts/polybar-scripts/pulseaudio-tail/pulseaudio-tail.sh --up
+scroll-down = /home/gem/.config/polybar/polybar-scripts/polybar-scripts/pulseaudio-tail/pulseaudio-tail.sh --down
+format-spacing = 0
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosini
